@@ -1,3 +1,10 @@
-{{#each galleries as |gallery|}}
-{{> gallery-details}}
-{{/each}}
+<main class="row mb-4 project">
+   {{#if loggedIn}}
+   <p>Welcome</p>
+   {{#each posts as |post|}}
+   <p>{{post.title}}</p>
+   {{/each}}
+   {{else}}
+   <p>Log in to access all of our features!</p>
+   {{/if}}
+</main>
