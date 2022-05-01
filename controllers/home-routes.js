@@ -18,18 +18,15 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET one gallery
+// GET all posts for one user
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
+    console.log(req.session.userId);
     const userData = await User.findByPk(req.session.userId, {
-      include: [
-        {
-          include: [{ model: Post }],
-          attributes: { exclude: ['password'] },
-        },
-      ],
+      attributes: { exclude: ['password'] },
+      include: [{ model: Post }],
     });
-
+    console.log(userData);
     const user = userData.get({ plain: true });
     res.render('dashboard', { user, loggedIn: req.session.loggedIn });
   } catch (err) {
